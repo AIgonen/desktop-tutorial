@@ -5,8 +5,11 @@
  */
 package ooppr1_2;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -32,6 +35,7 @@ public class OOPpr1_2 {
 //        }
 //       
        // FindElement();
+      
        FindElementsWeight();
     }   
     public static void FindElement(){
@@ -47,14 +51,28 @@ public class OOPpr1_2 {
     public static void FindElementsWeight(){
         
         Scanner scn = new Scanner(System.in);
-        System.out.println("Enter a Symbol of an element");
-        String elementsSymbol = scn.next();
+        System.out.println("Enter a formula");
+        String formula = scn.next();
         
      //   List<Elements> elementSymbol = ElementsDAO.findElementsWeight(elementsSymbol);
+         List<String> el = new ArrayList(); 
+       
+        Pattern r =  Pattern.compile("A[cglmrstu]|B[aehikr]?|C[adeflmnorsu]?|D[bsy]|E[rsu]|F[elmr]?|G[ade]|H[efgos]?|I[nr]?|Kr?|L[airuv]|M[dgnot]|N[abdeiop]?|Os?|P[abdmortu]?|R[abefghnu]|S[bcegimnr]?|T[abcehilm]|U(u[opst])?|V|W|Xe|Yb?|Z[nr]|\\d|\\(|\\)");
+        Matcher matcher =r.matcher(formula);
         
-        double weight = ElementsDAO.findElementsWeight(elementsSymbol);;
+    while (matcher.find()) {
+     //   System.out.print("Start index: " + matcher.start());
+     //   System.out.print(" End index: " + matcher.end() + " ");
+        el.add(matcher.group());
+    }
+        double weight, sum = 0;
+    for (String s : el){
+        weight = ElementsDAO.findElementsWeight(s);
+        sum = sum + weight;
+    }
         
-        System.out.println(weight); 
+        
+        System.out.println(sum); 
     }
     
     

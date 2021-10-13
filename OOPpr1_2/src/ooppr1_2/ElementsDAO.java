@@ -54,7 +54,7 @@ public class ElementsDAO {
         
         
         List<Elements> finds = new ArrayList();
-        double weight;
+        double weight = 0;
         
         for(Elements e : elements){
             if(e.getSymbol().equals(symbol)){
