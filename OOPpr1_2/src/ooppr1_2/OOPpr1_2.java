@@ -65,10 +65,18 @@ public class OOPpr1_2 {
      //   System.out.print(" End index: " + matcher.end() + " ");
         el.add(matcher.group());
     }
-        double weight, sum = 0;
+        double weight, sum = 0, previousElementweight = 0;
     for (String s : el){
+        if(s.contentEquals("2")){
+            sum += previousElementweight;
+        } else if(s.contentEquals("3")){
+            sum += previousElementweight * 2;
+        }
         weight = ElementsDAO.findElementsWeight(s);
-        sum = sum + weight;
+        previousElementweight = weight;
+        sum += weight;
+        
+        
     }
         
         
