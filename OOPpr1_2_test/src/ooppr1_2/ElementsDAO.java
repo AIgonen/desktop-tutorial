@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Sulearvuti 02 lenovo
+ * @author Andrei Igonen
  */
 public class ElementsDAO {
     public static List<Elements> elements = new ArrayList();
