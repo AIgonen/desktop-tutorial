@@ -45,7 +45,7 @@ public class OOPex4 {
             p1.setId(1);
             p1.setBirthday(sdf.parse("15.07.1987"));
             p1.setEmails(new String[] {"ivan.ivanov@mail.ru","ivan@test.com"});
-            p1.setLanguages(new String[] {"Hindu", "English", "Estonian"});
+            p1.setLanguages(new String[] {"Hindu", "English"});
             
             People p2 = new People();
             p2.setFirstname("Ivan");
@@ -60,7 +60,7 @@ public class OOPex4 {
             p3.setLastname("Karginov");
             p3.setId(3);
             p3.setBirthday(sdf.parse("22.12.2000"));
-            p3.setEmails(null);
+            p3.setEmails(new String[] {"ks@hotmail.com","karginn@outlook.com"});
             p3.setLanguages(new String[] {"Idish"});
             
         JSONArray pplList=new JSONArray();
@@ -69,9 +69,23 @@ public class OOPex4 {
         pplList.add(p3);
 
             readPeopleObject();
-        //  writePeopleObject(pplList);
-          
+        //    writePeopleObject(pplList);
 
+        
+   
+
+        
+        
+        // ПОЧЕМУ ЗАПИСИ В ДЖИСОН ФАЙОЕ ДУБЛИРУЮТСЯ С МАЛЕНИКОЙ БУКВЫ??????
+//      WRITE TO A FILE
+//        InputStream inputStream = new FileInputStream(new File("people.json"));
+//        JSONArray pplList=new JSONArray();
+//        pplList.add(p1);
+//        pplList.add(p2);
+//        pplList.add(p3);
+//        ObjectMapper mapper = new ObjectMapper();
+//        mapper.writeValue(new File("people.json"), pplList);
+//        inputStream.close();
     }
     private static void writePeopleObject(JSONArray pplList) throws IOException{
         
@@ -89,39 +103,14 @@ public class OOPex4 {
             InputStream inputStream = new FileInputStream(new File("people.json"));
             TypeReference<List<People>> typeReference = new TypeReference<List<People>>() {};
             List<People> people = mapper.readValue(inputStream, typeReference);
-//            for(People p : people){
-//                System.out.println("Firstname: " + p.getFirstname() + " Lastname: " + p.getLastname() + " Born on: " + sdf.format(p.getBirthday()) + " Emails: " + Arrays.toString(p.getEmails())+ " Languages: " + Arrays.toString(p.getLanguages()));
-//            }
-            whereIsNoEmail(people); // seaches for people without email adresses
-            whereIsMoreThen2Languages(people);
+            for(People p : people){
+                System.out.println("Firstname: " + p.getFirstname() + " Lastname: " + p.getLastname() + " Born on: " + sdf.format(p.getBirthday()) + " Emails: " + Arrays.toString(p.getEmails())+ " Languages: " + Arrays.toString(p.getLanguages()));
+            }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(OOPex4.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
             Logger.getLogger(OOPex4.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    private static void whereIsNoEmail(List<People> people){
-       SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        
-       for(People p : people){
-           if(p.getEmails() == null)
-           {
-                System.out.println("Firstname: " + p.getFirstname() + " Lastname: " + p.getLastname() + " Born on: " + sdf.format(p.getBirthday()) + " Emails: " + Arrays.toString(p.getEmails())+ " Languages: " + Arrays.toString(p.getLanguages()));
-           }
-       }
-    }
-    
-    private static void whereIsMoreThen2Languages(List<People> people){
-       SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
-        
-       for(People p : people){
-           if(p.Languages.length > 2)
-           {
-                System.out.println("Firstname: " + p.getFirstname() + " Lastname: " + p.getLastname() + " Born on: " + sdf.format(p.getBirthday()) + " Emails: " + Arrays.toString(p.getEmails())+ " Languages: " + Arrays.toString(p.getLanguages()));
-           }
-       }
-        }
-    
 
 }
